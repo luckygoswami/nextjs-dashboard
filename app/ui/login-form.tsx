@@ -14,6 +14,7 @@ import { useSearchParams } from 'next/navigation';
 
 export default function LoginForm() {
   const searchParams = useSearchParams();
+  const isDemo = searchParams.get('demo') === 'true';
   const callbackUrl = searchParams.get('callbackUrl') || '/dashboard';
   const [errorMessage, formAction, isPending] = useActionState(
     authenticate,
@@ -41,6 +42,7 @@ export default function LoginForm() {
                 id="email"
                 type="email"
                 name="email"
+                defaultValue={isDemo ? 'user@nextmail.com' : ''}
                 placeholder="Enter your email address"
                 required
               />
@@ -60,6 +62,7 @@ export default function LoginForm() {
                 type="password"
                 name="password"
                 placeholder="Enter password"
+                defaultValue={isDemo ? '123456' : ''}
                 required
                 minLength={6}
               />
